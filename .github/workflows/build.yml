@@ -3,21 +3,21 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libffi-dev python3-dev build-essential ccache git unzip zlib1g-dev zip openjdk-17-jdk-headless
           pip install --upgrade pip
-          pip install buildozer cython==0.29.33
+          pip install buildozer cython
 
       - name: Create Buildozer Spec
         run: |
@@ -35,3 +35,4 @@ jobs:
         with:
           name: package
           path: bin/*.apk
+
